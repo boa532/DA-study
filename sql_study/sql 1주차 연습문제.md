@@ -82,44 +82,80 @@ select count(distinct city)
 from city c
 ```
 
-### 11.
+### 11. actors full name, unique values, upper
 ```
+select distinct upper(first_name||' '||last_name) as name from actor a
+order by name
+```
+  - 변수 두 개 붙일 때는 `||''||` 이렇게 사용하면 됨
+  - 문제에는 없었지만 보기 좋게 `order by name`을 사용하여 정렬
+
+### 12. among customers, active=0, the numbers of customers
+```
+select count(distinct customer_id) 
+from customer c 
+where active=0
 ```
 
-### 12.
+### 13. store_id=1, the number of customers
 ```
-```
-
-### 13.
-```
-```
-
-### 14.
-```
+select count(customer_id)
+from customer c 
+where store_id = 1
 ```
 
-### 15.
+### 14. how many returns when return date = 2005/06/20, 
 ```
+select count(rental_id) 
+from rental r
+where date(return_date)='2005-06-20'
+```
+  - rental table의 return_date의 형태는 `datetime(format: YYYY-MM-DD HH:MI:SS)`임 -> 2005-06-20을 조건으로 하기 위해서는 `date(return_date)`로 해서 형식을 변환시켜줘야 함
+  - 날짜는 `'yyyy-mm-dd'`로 표현하면 됨
+
+### 15. all columns from film table where release at 2006, rating = 'G' rental_duration=3, 
+```
+select *
+from film f 
+where release_year = '2006' 
+and rating='G' 
+and rental_duration = 3
 ```
 
-### 16.
+### 16. id, name in language table
 ```
+select language_id, name
+from "language" l 
+```
+  - language 컬럼은 자동으로 따옴표 처리가 된다. language라는 함수가 있어서 그런걸까?(검색은 해봤는데 뭐 딱히 잘 안 나옴..)
+
+### 17. film_id, title, description in film table where rental_duration>=7
+```
+select film_id, title, description
+from film f
+where rental_duration >=7
 ```
 
-### 17.
+### 18. film_id, title, description in film table where rental_duration=3 or 5
 ```
-```
-
-### 18.
-```
-```
-
-### 19.
-```
+select film_id, title, description
+from film f
+where rental_duration =3
+or rental_duration =5
 ```
 
-### 20.
+### 19. id, name in actor table where fisrtname=Nick or lastname=Hunt
 ```
+select actor_id, first_name, last_name 
+from actor
+where first_name = 'Nick' or last_name = 'Hunt'
 ```
+
+### 20.first_name -> firstname, last_name ->lastname in actor table
+```
+select first_name as fisrtname, last_name as lastname
+from actor
+```
+ - `as`를 쓰면 새롭게 이름을 부여할 수 있
 
 
